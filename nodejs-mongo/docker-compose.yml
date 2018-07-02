@@ -1,0 +1,25 @@
+version: '3.6'
+
+networks: 
+  default:
+      name: inventory
+
+services: 
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/src
+    ports:
+      - 8080:80
+
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    volumes:
+      - ./data/db:/data/db
+    environment:
+          - MONGO_DATA_DIR=/data/db
+    ports:
+      - 27017:27017
