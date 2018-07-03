@@ -1,0 +1,18 @@
+version: '3.6'
+
+networks: 
+  default:
+      name: alpine-node
+
+services: 
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    links:
+      - db:redis
+
+  db:
+    image: redis
